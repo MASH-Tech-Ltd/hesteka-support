@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <BrowserRouter>
-      <div className="h-screen overflow-hidden flex flex-col" style={{ backgroundColor: '#fff9f0', color: '#3a2a1a' }}>
+      <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#fff9f0', color: '#3a2a1a' }}>
         <Header />
         
         <main className="flex-1 flex flex-col p-4 md:p-6 w-full max-w-7xl mx-auto relative min-h-0">

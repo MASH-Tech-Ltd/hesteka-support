@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PayPalHostedFieldsProvider, PayPalHostedField, usePayPalHostedFields } from "@paypal/react-paypal-js";
-import axios from 'axios';
+import api from '../api/axios';
 
 const SubmitButton = ({ amount, donorName, donorEmail, setError }) => {
     const hostedFields = usePayPalHostedFields();
@@ -17,13 +17,13 @@ const SubmitButton = ({ amount, donorName, donorEmail, setError }) => {
             const submitResponse = await hostedFields.submit();
 
             // Capture order on backend
-            const resCapture = await axios.post(`${import.meta.env.VITE_API_URL}/payments/paypal/capture-order`, {
+            const resCapture = await api.post('/payments/paypal/capture-order', {
                 orderId: submitResponse.orderId,
                 payerName: donorName,
                 payerEmail: donorEmail
             });
 
-            if (resCapture.data.status === 'ok') {
+            if (resCapture.status === 200 && resCapture.data.status === 'ok') {
                 window.location.href = '/payment-success';
             } else {
                 setError("Payment capture failed.");
@@ -56,13 +56,16 @@ export default function PayPalCheckoutForm({ amount, donorName, donorEmail, onCa
 
     const createOrder = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/payments/paypal/create-order`, {
+            const res = await api.post('/payments/paypal/create-order', {
                 amount: Number(amount),
                 payerName: donorName,
                 payerEmail: donorEmail,
                 currency: 'eur'
             });
-            return res.data.data.orderId;
+            if (res.status === 200 && res.data.status === 'ok') {
+                return res.data.data.orderId;
+            }
+            throw new Error("Failed to create order");
         } catch (err) {
             console.error(err);
             throw new Error("Could not create order");

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const translations = {
   en: {
@@ -106,6 +106,10 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key) => translations[language][key] || key;
+
+  useEffect(() => {
+    document.title = language === 'fr' ? 'Soutenir Hesteka' : 'Support Hesteka';
+  }, [language]);
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
