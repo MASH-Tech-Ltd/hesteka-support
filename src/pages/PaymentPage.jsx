@@ -98,6 +98,7 @@ export default function PaymentPage() {
           donorName: donorName,
           donorEmail: donorEmail,
           type: "one-time",
+          currency: "eur",
         });
 
         if (res.status === 200 && res.data.status === "ok" && res.data.data.clientSecret) {
@@ -217,6 +218,7 @@ export default function PaymentPage() {
                     donorName: donorName,
                     donorEmail: donorEmail,
                     type: "one-time",
+                    currency: "eur",
                   });
                   if (res.status === 200 && res.data.status === "ok") {
                     return res.data.data.orderId;
