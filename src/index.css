@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Lilita+One&family=Inter:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+body {
+  background-color: #fff9f0;
+  color: #3a2a1a;
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
