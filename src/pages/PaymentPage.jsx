@@ -58,6 +58,8 @@ export default function PaymentPage() {
   const [donorEmail, setDonorEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
+  const [paymentIntentId, setPaymentIntentId] = useState("");
+  const [paypalOrderId, setPaypalOrderId] = useState("");
   const [showPayPal, setShowPayPal] = useState(false);
   const [error, setError] = useState(null);
 
@@ -103,6 +105,7 @@ export default function PaymentPage() {
 
         if (res.status === 200 && res.data.status === "ok" && res.data.data.clientSecret) {
           setClientSecret(res.data.data.clientSecret);
+          setPaymentIntentId(res.data.data.paymentIntentId);
         } else {
           setError(res.data.message || t("failedInitiate"));
         }
@@ -155,7 +158,15 @@ export default function PaymentPage() {
           >
             <StripeCheckoutForm
               amount={amount}
-              onCancel={() => setClientSecret(null)}
+              onCancel={() => {
+                if (paymentIntentId) {
+                  api.post("/donations/stripe/cancel", { paymentIntentId }).catch(err => {
+                    console.error("Error canceling payment intent:", err);
+                  });
+                }
+                setClientSecret(null);
+                setPaymentIntentId("");
+              }}
             />
           </Elements>
         </div>
@@ -221,6 +232,7 @@ export default function PaymentPage() {
                     currency: "eur",
                   });
                   if (res.status === 200 && res.data.status === "ok") {
+                    setPaypalOrderId(res.data.data.orderId);
                     return res.data.data.orderId;
                   }
                   throw new Error("Failed to initiate PayPal order");
@@ -246,7 +258,11 @@ export default function PaymentPage() {
                 }
               }}
               onCancel={() => {
+                if (paypalOrderId) {
+                  api.post("/donations/paypal/cancel", { orderId: paypalOrderId }).catch(err => console.error(err));
+                }
                 setShowPayPal(false);
+                setPaypalOrderId("");
               }}
               onError={(err) => {
                 console.error(err);
@@ -258,7 +274,13 @@ export default function PaymentPage() {
           </PayPalScriptProvider>
 
           <button
-            onClick={() => setShowPayPal(false)}
+            onClick={() => {
+              if (paypalOrderId) {
+                api.post("/donations/paypal/cancel", { orderId: paypalOrderId }).catch(err => console.error(err));
+              }
+              setShowPayPal(false);
+              setPaypalOrderId("");
+            }}
             className="w-full py-3 rounded-full font-bold transition-all border hover:bg-gray-50"
             style={{
               borderColor: colors.border,
