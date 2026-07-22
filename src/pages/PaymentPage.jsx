@@ -51,7 +51,7 @@ export default function PaymentPage() {
   const isStripeEnabled = import.meta.env.VITE_STRIPE_ENABLED !== "false";
   const isPayPalEnabled = import.meta.env.VITE_PAYPAL_ENABLED === "true";
 
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [amount, setAmount] = useState("20");
   const [method, setMethod] = useState(isStripeEnabled ? "stripe" : isPayPalEnabled ? "paypal" : "");
   const [donorName, setDonorName] = useState("");
@@ -72,7 +72,7 @@ export default function PaymentPage() {
   };
 
   const headingStyle = {
-    fontFamily: '"Lilita One", cursive',
+    fontFamily: '\"Barlow Condensed\", sans-serif',
     color: colors.brand,
   };
   const cardStyle = {
@@ -150,6 +150,7 @@ export default function PaymentPage() {
             stripe={stripePromise}
             options={{
               clientSecret,
+              locale: language === 'fr' ? 'fr' : 'en',
               appearance: {
                 theme: "stripe",
                 variables: { colorPrimary: colors.brand },
@@ -218,6 +219,7 @@ export default function PaymentPage() {
             options={{
               "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID,
               currency: "EUR",
+              locale: language === 'fr' ? 'fr_FR' : 'en_US',
             }}
           >
             <PayPalButtons
@@ -300,9 +302,9 @@ export default function PaymentPage() {
       {/* Hesteka Platform Info */}
       <div className="w-full max-w-4xl flex flex-col items-center mb-4 md:mb-6 mt-0 animate-fade-in px-2 md:px-4">
         <h2
-          className="text-xl sm:text-3xl md:text-4xl tracking-wide uppercase mb-2 md:mb-3 text-center px-1 md:px-2"
+          className="text-xl sm:text-3xl md:text-4xl tracking-wide font-semibold mb-2 md:mb-3 text-center px-1 md:px-2"
           style={{
-            fontFamily: '"Lilita One", cursive',
+            fontFamily: '\"Barlow Condensed\", sans-serif',
             color: colors.brandDark,
             textShadow: "0 2px 4px rgba(0,0,0,0.05)",
           }}
@@ -317,100 +319,13 @@ export default function PaymentPage() {
           {t("contributionFuels")}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full max-w-4xl mx-auto">
-          {/* Detail Card 1 */}
-          <div className="flex flex-row items-center p-2 rounded-lg bg-white shadow-[0_2px_8px_rgb(0,0,0,0.03)] border border-[#ebd8c3]">
-            <div
-              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center mr-2.5"
-              style={{
-                backgroundColor: `${colors.brand}15`,
-                color: colors.brand,
-              }}
-            >
-              <Heart size={16} strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col text-left">
-              <h3
-                className="text-[11px] font-bold uppercase tracking-wider"
-                style={{
-                  fontFamily: '"Lilita One", cursive',
-                  color: colors.dark,
-                }}
-              >
-                {t("urgentRescue")}
-              </h3>
-              <p
-                className="text-[9.5px] leading-tight font-semibold opacity-75"
-                style={{ color: colors.dark }}
-              >
-                {t("urgentRescueDesc")}
-              </p>
-            </div>
-          </div>
 
-          {/* Detail Card 2 */}
-          <div className="flex flex-row items-center p-2 rounded-lg bg-white shadow-[0_2px_8px_rgb(0,0,0,0.03)] border border-[#ebd8c3]">
-            <div
-              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center mr-2.5"
-              style={{
-                backgroundColor: `${colors.brandDark}15`,
-                color: colors.brandDark,
-              }}
-            >
-              <MapPin size={16} strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col text-left">
-              <h3
-                className="text-[11px] font-bold uppercase tracking-wider"
-                style={{
-                  fontFamily: '"Lilita One", cursive',
-                  color: colors.dark,
-                }}
-              >
-                {t("animalTracking")}
-              </h3>
-              <p
-                className="text-[9.5px] leading-tight font-semibold opacity-75"
-                style={{ color: colors.dark }}
-              >
-                {t("animalTrackingDesc")}
-              </p>
-            </div>
-          </div>
-
-          {/* Detail Card 3 */}
-          <div className="flex flex-row items-center p-2 rounded-lg bg-white shadow-[0_2px_8px_rgb(0,0,0,0.03)] border border-[#ebd8c3]">
-            <div
-              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center mr-2.5"
-              style={{ backgroundColor: `#facc1520`, color: "#d97706" }}
-            >
-              <Shield size={16} strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col text-left">
-              <h3
-                className="text-[11px] font-bold uppercase tracking-wider"
-                style={{
-                  fontFamily: '"Lilita One", cursive',
-                  color: colors.dark,
-                }}
-              >
-                {t("communityCare")}
-              </h3>
-              <p
-                className="text-[9.5px] leading-tight font-semibold opacity-75"
-                style={{ color: colors.dark }}
-              >
-                {t("communityCareDesc")}
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Container Card */}
       <div
         className="bg-[#fffcf8] p-4 md:p-6 lg:p-8 shadow-2xl relative w-full max-w-6xl rounded-[1.5rem] md:rounded-[2rem]"
-        style={{ border: `1px solid ${colors.border}` }}
+        style={{ border: `1px solid ${colors.border}`, fontFamily: '"Barlow Condensed", sans-serif' }}
       >
         {/* Horizontal Stepper */}
         <div className="flex items-center justify-center mb-6 md:mb-8 w-full max-w-2xl mx-auto relative px-4 md:px-6 mt-1 md:mt-2">
@@ -427,7 +342,7 @@ export default function PaymentPage() {
               className="w-8 h-8 md:w-10 md:h-10 rounded-full text-white flex items-center justify-center text-base md:text-lg shadow-lg"
               style={{
                 backgroundColor: colors.brand,
-                fontFamily: '"Lilita One", cursive',
+                fontFamily: '\"Barlow Condensed\", sans-serif',
                 boxShadow: `0 4px 10px ${colors.brand}66`,
               }}
             >
@@ -437,7 +352,7 @@ export default function PaymentPage() {
               className="w-8 h-8 md:w-10 md:h-10 rounded-full text-[#9a8a7a] flex items-center justify-center text-base md:text-lg shadow-inner"
               style={{
                 backgroundColor: "#f4e8d8",
-                fontFamily: '"Lilita One", cursive',
+                fontFamily: '\"Barlow Condensed\", sans-serif',
               }}
             >
               2
@@ -446,7 +361,7 @@ export default function PaymentPage() {
               className="w-8 h-8 md:w-10 md:h-10 rounded-full text-[#9a8a7a] flex items-center justify-center text-base md:text-lg shadow-inner"
               style={{
                 backgroundColor: "#f4e8d8",
-                fontFamily: '"Lilita One", cursive',
+                fontFamily: '\"Barlow Condensed\", sans-serif',
               }}
             >
               3
@@ -462,7 +377,7 @@ export default function PaymentPage() {
           <div className="flex flex-col gap-4 md:gap-6">
             <h3
               className="text-center font-bold tracking-widest text-xs md:text-sm"
-              style={{ color: colors.dark, fontFamily: '"Inter", sans-serif' }}
+              style={{ color: colors.dark, fontFamily: '"Barlow Condensed", sans-serif' }}
             >
               {t("selectAmount")}
             </h3>
@@ -527,7 +442,7 @@ export default function PaymentPage() {
           <div className="flex flex-col gap-4 md:gap-6 border-t lg:border-t-0 lg:border-l border-[#ebd8c3] pt-5 md:pt-8 lg:pt-0 lg:pl-6">
             <h3
               className="text-center font-bold tracking-widest text-xs md:text-sm"
-              style={{ color: colors.dark, fontFamily: '"Inter", sans-serif' }}
+              style={{ color: colors.dark, fontFamily: '"Barlow Condensed", sans-serif' }}
             >
               {t("yourDetails")}
             </h3>
@@ -579,7 +494,7 @@ export default function PaymentPage() {
           <div className="flex flex-col gap-4 md:gap-6 border-t lg:border-t-0 lg:border-l border-[#ebd8c3] pt-5 md:pt-8 lg:pt-0 lg:pl-6 relative">
             <h3
               className="text-center font-bold tracking-widest text-xs md:text-sm"
-              style={{ color: colors.dark, fontFamily: '"Inter", sans-serif' }}
+              style={{ color: colors.dark, fontFamily: '"Barlow Condensed", sans-serif' }}
             >
               {t("paymentMethod")}
             </h3>
@@ -669,7 +584,7 @@ export default function PaymentPage() {
               className="mt-4 md:mt-6 w-full text-white text-base md:text-lg lg:text-xl tracking-wider py-3 md:py-4 lg:py-5 px-2 flex items-center justify-center transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:-translate-y-1 active:translate-y-1 active:border-b-0 leading-tight"
               style={{
                 cursor: "pointer",
-                fontFamily: '"Inter", sans-serif',
+                fontFamily: '"Barlow Condensed", sans-serif',
                 fontWeight: 800,
                 backgroundColor: colors.brand,
                 borderRadius: "9999px",

@@ -3,21 +3,25 @@ import { useLanguage } from "../LanguageContext";
 
 export default function Header() {
   const { t, language, toggleLanguage } = useLanguage();
-  const headingFont = { fontFamily: '"Lilita One", cursive' };
+  const headingFont = { fontFamily: '\"Barlow Condensed\", sans-serif' };
 
   return (
-    <header className="relative z-20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-b border-white/10 bg-gradient-to-r from-[#8a3319] via-[#C2512F] to-[#8a3319]">
+    <header className="relative z-20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border-b border-white/10 bg-[#a44026]">
       <div className="absolute inset-0 bg-black/5 mix-blend-overlay pointer-events-none"></div>
 
       <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between relative z-10">
         {/* Logo area */}
-        <div className="flex items-center justify-center transition-transform duration-500 hover:scale-105 hover:-translate-y-0.5 cursor-pointer">
+        <a
+          href={import.meta.env.VITE_HESTEKA_WEBSITE_URL}
+          target="_blank"
+          className="flex items-center justify-center transition-transform duration-500 hover:scale-105 hover:-translate-y-0.5 cursor-pointer"
+        >
           <img
             src="/hestekalogo.png"
             alt="Hesteka Logo"
             className="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
           />
-        </div>
+        </a>
 
         {/* Decorative Tagline & Lang Toggle */}
         <div className="mt-4 sm:mt-0 flex flex-col sm:flex-row items-center gap-3 sm:gap-6 relative z-20">
@@ -61,9 +65,6 @@ export default function Header() {
           </div>
         </div>
       </div>
-
-      {/* Elegant gold bottom accent */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-transparent via-[#facc15] to-transparent opacity-70"></div>
     </header>
   );
 }

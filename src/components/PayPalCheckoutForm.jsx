@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { PayPalHostedFieldsProvider, PayPalHostedField, usePayPalHostedFields } from "@paypal/react-paypal-js";
 import api from '../api/axios';
+import { useLanguage } from '../LanguageContext';
 
 const SubmitButton = ({ amount, donorName, donorEmail, setError }) => {
     const hostedFields = usePayPalHostedFields();
     const [isProcessing, setIsProcessing] = useState(false);
+    const { t } = useLanguage();
 
     const submitHandler = async () => {
         if (!hostedFields?.submit) return;
@@ -46,13 +48,14 @@ const SubmitButton = ({ amount, donorName, donorEmail, setError }) => {
                 boxShadow: `0 10px 20px -5px rgba(0,48,135,0.4)`
             }}
         >
-            {isProcessing ? 'Processing...' : `Pay €${amount}`}
+            {isProcessing ? t('processing') : `${t('pay')} €${amount}`}
         </button>
     );
 };
 
 export default function PayPalCheckoutForm({ amount, donorName, donorEmail, onCancel }) {
     const [error, setError] = useState("");
+    const { t } = useLanguage();
 
     const createOrder = async () => {
         try {
@@ -79,7 +82,7 @@ export default function PayPalCheckoutForm({ amount, donorName, donorEmail, onCa
             <PayPalHostedFieldsProvider createOrder={createOrder}>
                 <div className="flex flex-col gap-4 mt-2">
                     <div className="flex flex-col gap-2">
-                        <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>Card Number</label>
+                        <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>{t('cardNumber')}</label>
                         <div className="border p-4 rounded-xl bg-white focus-within:border-[#003087] transition-colors" style={{ borderColor: '#ebd8c3', minHeight: '52px' }}>
                             <PayPalHostedField id="card-number" hostedFieldType="number" options={{ selector: "#card-number" }} />
                         </div>
@@ -87,13 +90,13 @@ export default function PayPalCheckoutForm({ amount, donorName, donorEmail, onCa
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col gap-2">
-                            <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>Expiry Date</label>
+                            <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>{t('expiryDate')}</label>
                             <div className="border p-4 rounded-xl bg-white focus-within:border-[#003087] transition-colors" style={{ borderColor: '#ebd8c3', minHeight: '52px' }}>
                                 <PayPalHostedField id="expiration-date" hostedFieldType="expirationDate" options={{ selector: "#expiration-date" }} />
                             </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>CVV</label>
+                            <label className="text-xs font-bold opacity-80 uppercase tracking-wide" style={{ color: '#3a2a1a' }}>{t('cvv')}</label>
                             <div className="border p-4 rounded-xl bg-white focus-within:border-[#003087] transition-colors" style={{ borderColor: '#ebd8c3', minHeight: '52px' }}>
                                 <PayPalHostedField id="cvv" hostedFieldType="cvv" options={{ selector: "#cvv" }} />
                             </div>
@@ -109,7 +112,7 @@ export default function PayPalCheckoutForm({ amount, donorName, donorEmail, onCa
                 className="w-full py-3 rounded-full font-bold transition-all border hover:bg-gray-50"
                 style={{ borderColor: '#ebd8c3', color: '#3a2a1a', backgroundColor: 'transparent' }}
             >
-                Cancel
+                {t('cancel')}
             </button>
         </div>
     );

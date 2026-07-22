@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
+import { useLanguage } from '../LanguageContext';
 
 export default function StripeCheckoutForm({ amount, onSuccess, onCancel }) {
   const stripe = useStripe();
   const elements = useElements();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -44,7 +46,7 @@ export default function StripeCheckoutForm({ amount, onSuccess, onCancel }) {
           disabled={loading}
           className="flex-1 bg-white border border-[#e8ddd0] text-[#3a2a1a] font-bold py-3 rounded-xl hover:bg-[#fcfaf7] transition-all disabled:opacity-50"
         >
-          Cancel
+          {t('cancel')}
         </button>
         <button
           type="submit"
@@ -54,7 +56,7 @@ export default function StripeCheckoutForm({ amount, onSuccess, onCancel }) {
           {loading ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
           ) : (
-            `Pay €${amount}`
+            `${t('pay')} €${amount}`
           )}
         </button>
       </div>

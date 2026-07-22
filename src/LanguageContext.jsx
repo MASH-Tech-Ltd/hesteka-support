@@ -3,18 +3,19 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const translations = {
   en: {
     // App.jsx
-    rescue: "Rescue",
-    care: "Care",
-    protect: "Protect",
+    rescue: "Report",
+    care: "Share",
+    protect: "Help",
     thankYou: "Thank You!",
     supportThanks: "Your generous support helps us continue our mission.",
     cancelled: "Cancelled",
     paymentCancelled: "Your payment process was safely cancelled.",
-    rightsReserved: "Hesteka Association. All rights reserved.",
+    redirectingIn: "Redirecting in",
+    rightsReserved: "Hesteka Micro-Entreprise. All rights reserved.",
     
     // PaymentPage.jsx - Intro
-    helpRescueProtect: "Help Us Rescue & Protect Animals",
-    contributionFuels: "Your contribution fuels our community-driven ecosystem dedicated to animal welfare. Every donation empowers everyday heroes on the ground.",
+    helpRescueProtect: "Help us rescue & protect animals",
+    contributionFuels: "Your contribution allows us to keep the app free and to provide concrete resources to the organizations that work every day on the ground for animals. 🐾",
     urgentRescue: "Urgent Rescue",
     urgentRescueDesc: "Funding emergency local rescue missions.",
     animalTracking: "Animal Tracking",
@@ -36,6 +37,11 @@ const translations = {
     secureStripe: "Secure credit card payment via Stripe",
     securePayPal: "Secure payment via PayPal",
     donationText: "Donation",
+    pay: "Pay",
+    processing: "Processing...",
+    cardNumber: "Card Number",
+    expiryDate: "Expiry Date",
+    cvv: "CVV",
 
     // Errors
     failedInitiate: "Failed to initiate payment",
@@ -49,18 +55,19 @@ const translations = {
   },
   fr: {
     // App.jsx
-    rescue: "Sauver",
-    care: "Soigner",
-    protect: "Protéger",
+    rescue: "Signale",
+    care: "Partage",
+    protect: "Aide",
     thankYou: "Merci !",
     supportThanks: "Votre généreux soutien nous aide à poursuivre notre mission.",
     cancelled: "Annulé",
     paymentCancelled: "Votre processus de paiement a été annulé en toute sécurité.",
-    rightsReserved: "Association Hesteka. Tous droits réservés.",
+    redirectingIn: "Redirection dans",
+    rightsReserved: "Micro-Entreprise Hesteka. Tous droits réservés.",
     
     // PaymentPage.jsx - Intro
-    helpRescueProtect: "Aidez-Nous à Sauver & Protéger les Animaux",
-    contributionFuels: "Votre contribution alimente notre écosystème communautaire dédié au bien-être animal. Chaque don donne des moyens d'action aux héros de tous les jours sur le terrain.",
+    helpRescueProtect: "Aidez-nous à sauver & protéger les animaux",
+    contributionFuels: "Votre contribution nous permet de maintenir l'application gratuite et de donner des moyens d'action concrets aux associations qui œuvrent chaque jour sur le terrain pour les animaux. 🐾",
     urgentRescue: "Sauvetage Urgent",
     urgentRescueDesc: "Financement des missions d'urgence de sauvetage local.",
     animalTracking: "Suivi des Animaux",
@@ -82,6 +89,11 @@ const translations = {
     secureStripe: "Paiement sécurisé par carte de crédit via Stripe",
     securePayPal: "Paiement sécurisé via PayPal",
     donationText: "Don",
+    pay: "Payer",
+    processing: "Traitement...",
+    cardNumber: "Numéro de carte",
+    expiryDate: "Date d'expiration",
+    cvv: "CVV",
 
     // Errors
     failedInitiate: "Échec de l'initiation du paiement",

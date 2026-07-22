@@ -4,7 +4,7 @@ import { useLanguage } from '../LanguageContext';
 
 export default function NotFound() {
   const { t } = useLanguage();
-  const headingFont = { fontFamily: '"Lilita One", cursive' };
+  const headingFont = { fontFamily: '\"Barlow Condensed\", sans-serif' };
 
   return (
     <div className="flex-1 flex flex-col items-center justify-center w-full h-full animate-fade-in p-4">
