@@ -110,7 +110,7 @@ const translations = {
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(localStorage.getItem('lang') || 'en');
+  const [language, setLanguage] = useState(localStorage.getItem('lang') || 'fr');
 
   const toggleLanguage = (lang) => {
     setLanguage(lang);
