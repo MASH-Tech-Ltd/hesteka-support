@@ -110,11 +110,11 @@ const translations = {
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState(localStorage.getItem('lang') || 'fr');
+  const [language, setLanguage] = useState(localStorage.getItem('language_pref') || 'fr');
 
   const toggleLanguage = (lang) => {
     setLanguage(lang);
-    localStorage.setItem('lang', lang);
+    localStorage.setItem('language_pref', lang);
   };
 
   const t = (key) => translations[language][key] || key;
