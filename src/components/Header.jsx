@@ -32,17 +32,17 @@ export default function Header() {
             <span className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all cursor-default transform hover:scale-110">
               {t("rescue")}
             </span>
-            <span className="text-[#facc15] opacity-90 animate-pulse text-[10px] sm:text-xs">
-              ◆
+            <span className="text-white opacity-90 animate-pulse text-[10px] sm:text-xs">
+              •
             </span>
             <span className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all cursor-default transform hover:scale-110">
               {t("care")}
             </span>
             <span
-              className="text-[#facc15] opacity-90 animate-pulse text-[10px] sm:text-xs"
+              className="text-white opacity-90 animate-pulse text-[10px] sm:text-xs"
               style={{ animationDelay: "0.5s" }}
             >
-              ◆
+              •
             </span>
             <span className="hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] transition-all cursor-default transform hover:scale-110">
               {t("protect")}
@@ -51,16 +51,16 @@ export default function Header() {
 
           <div className="flex items-center gap-1 bg-black/20 p-1 rounded-full border border-white/10 mt-2 sm:mt-0">
             <button
-              onClick={() => toggleLanguage("en")}
-              className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${language === "en" ? "bg-white text-[#C2512F] shadow-sm" : "text-white hover:bg-white/20"}`}
-            >
-              EN
-            </button>
-            <button
               onClick={() => toggleLanguage("fr")}
               className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${language === "fr" ? "bg-white text-[#C2512F] shadow-sm" : "text-white hover:bg-white/20"}`}
             >
               FR
+            </button>
+            <button
+              onClick={() => toggleLanguage("en")}
+              className={`text-xs font-bold px-3 py-1 rounded-full transition-all ${language === "en" ? "bg-white text-[#C2512F] shadow-sm" : "text-white hover:bg-white/20"}`}
+            >
+              EN
             </button>
           </div>
         </div>
