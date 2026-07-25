@@ -14,7 +14,7 @@ const translations = {
     rightsReserved: "Hesteka Micro-Entreprise. All rights reserved.",
     
     // PaymentPage.jsx - Intro
-    helpRescueProtect: "Help us rescue & protect animals",
+    helpRescueProtect: "Help us save & protect animals",
     contributionFuels: "Your contribution allows us to keep the app free and to provide concrete resources to the organizations that work every day on the ground for animals. 🐾",
     urgentRescue: "Urgent Rescue",
     urgentRescueDesc: "Funding emergency local rescue missions.",
@@ -130,4 +130,12 @@ export const LanguageProvider = ({ children }) => {
   );
 };
 
-export const useLanguage = () => useContext(LanguageContext);
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+
+  if (!context) {
+    throw new Error("useLanguage must be used within LanguageProvider");
+  }
+
+  return context;
+};
